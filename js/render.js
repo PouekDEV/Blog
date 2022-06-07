@@ -43,6 +43,9 @@ function render(){
         if(String(text[current]).substring(0, 5) == "#TITL"){
             document.getElementById('title').textContent = String(text[current]).replace('#TITL', '');
         }
+        else if(String(text[current]).substring(0, 5) == "#LANG"){
+            document.documentElement.setAttribute("lang", String(text[current]).replace('#LANG', ''));
+        }
         else if(String(text[current]).substring(0, 5) == "#NOTL"){
             document.getElementById('title').textContent = "";
         }
@@ -55,6 +58,12 @@ function render(){
             var date = document.createElement("P");
             date.appendChild(document.createTextNode(String(text[current]).replace('#DATE', '')));
             date.setAttribute("class","timestamps");
+            document.getElementById("render-box").appendChild(date);
+        }
+        else if(String(text[current]).substring(0, 5) == "#IMGA"){
+            var date = document.createElement("P");
+            date.appendChild(document.createTextNode(String(text[current]).replace('#IMGA', '')));
+            date.setAttribute("class","imageattribution");
             document.getElementById("render-box").appendChild(date);
         }
         else if(String(text[current]).substring(0, 5) == "#TEXT"){
@@ -161,4 +170,5 @@ function render(){
         current += 1;
     }
 }
-readTextFile("posts/test.pmd")
+// Activation function
+//readTextFile("posts/test.pmd")

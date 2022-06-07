@@ -38,3 +38,7 @@ body{
 code {
     text-align: left;
 }
+.imageattribution{
+    font-size: 20px;
+    color: rgb(172, 172, 172);
+}

@@ -1,0 +1,51 @@
+.upperbar{
+    background-color: #2c2c2c;
+    font-size: 30px;
+    height: 150px;
+}
+.ubtitle{
+    text-align: left;
+    font-size: 50px;
+    position: fixed;
+    left: 200px;
+}
+.ubimage{
+    position: fixed;
+    left: 50px;
+}
+.aboutbuttonpos{
+    right: 400px;
+    position: fixed;
+}
+.aboutbutton{
+    background-color: #1a1a1a;
+    font-family: 'Courier New';
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 30px 64px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 32px;
+}
+.aboutbutton:hover{
+    background-color: #505050;
+}
+.postbuttonpos{
+    right: 100px;
+    position: fixed;
+}
+.postbutton{
+    background-color: #1a1a1a;
+    font-family: 'Courier New';
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 30px 64px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 32px;
+}
+.postbutton:hover{
+    background-color: #505050;
+}
