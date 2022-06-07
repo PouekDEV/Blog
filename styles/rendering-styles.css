@@ -1,0 +1,40 @@
+body{
+    background-color: #202020;
+    color: #ffffff;
+    font-family: "Courier New";
+    margin: auto;
+    text-align: center;
+}
+.timestamps{
+    font-size: 15px;
+    color: gray;
+}
+.normaltext{
+    font-size: 30px;
+}
+.bold{
+    font-size: 30px;
+    font-weight: bold;
+}
+.underline{
+    font-size: 30px;
+    text-decoration: underline;
+}
+.redtext{
+    font-size: 30px;
+    color: red;
+}
+.link{
+    font-size: 30px;
+    color: orange;
+}
+.texthead{
+    font-size: 50px;
+}
+.websiteembed{
+    resize: both;
+    overflow: auto;
+}
+code {
+    text-align: left;
+}

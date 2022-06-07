@@ -1,0 +1,23 @@
+#TITL(STRING) - Sets title of the post
+#NOTL - Removes the title from the post
+#IMAG(LINK) - Adds an image to the post
+#TEXT(STRING) - Adds text line to the post
+#TEXR(STRING) - Adds red text line to the post
+#YTEM(ID OF THE VIDEO FROM YOUTUBE URL) - Embeds a YouTube video into the post
+#SPAC - Adds \n to the post
+#HEAD(STRING) - Adds header to the post
+#LINK(LINK) - Adds a "link" text to the post with the pasted URL
+#LTXT(STRING) - Alters the default "link" text in link (Needs to be directly under #LINK)
+#DATE(STRING) - Adds a date timestamp to the post
+#IFRM(LINK) - Embeds a website
+#IFWI(INT) - Alters the default width value in IFRAME (Needs to be directly under #IFRM)
+#IFHE(INT) - Alters the default height value in IFRAME (Needs to be directly under #IFWI)
+#CODE(PATHTOSNIPPET) - Adds code snippet to the post
+#CLNG(STRING) - Specifies code snippet language if needed
+#BOLD(STRING) - Adds bold text to the post
+#UNDT(STRING) - Adds underlined text to the post
+#QUOT(STRING) - Adds a quote to the post
+#IMGA(STRING) - Adds small text that you can put under images
+#LANG(LANGAUGECODE) - Defines the language of the post
+
+That's all for now
