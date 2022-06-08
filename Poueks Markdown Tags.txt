@@ -1,6 +1,8 @@
 #TITL(STRING) - Sets title of the post
 #NOTL - Removes the title from the post
 #IMAG(LINK) - Adds an image to the post
+#IMWI(INT) - Alters the width value of image (Needs to be directly under #IMAG)
+#IMHE(INT) - Alters the height value of image (Needs to be directly unde #IMWI)
 #TEXT(STRING) - Adds text line to the post
 #TEXR(STRING) - Adds red text line to the post
 #YTEM(ID OF THE VIDEO FROM YOUTUBE URL) - Embeds a YouTube video into the post

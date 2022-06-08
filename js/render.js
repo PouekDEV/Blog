@@ -1,5 +1,12 @@
 var content;
 var snippet;
+setTimeout(() =>{
+    if(window.location.href.includes("#")){
+        var path = window.location.hash;
+        path = path.replace("#","");
+        readTextFile("posts/"+path);
+    }
+},100)
 function readTextFile(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -50,8 +57,20 @@ function render(){
             document.getElementById('title').textContent = "";
         }
         else if(String(text[current]).substring(0, 5) == "#IMAG"){
+            var next = current;
+            next = next+=1;
             var image = document.createElement("IMG");
             image.setAttribute("src",String(text[current]).replace('#IMAG', ''));
+            if(String(text[next]).substring(0, 5) == "#IMWI"){
+                image.setAttribute("width",String(text[next]).replace('#IMWI', ''));
+                next = next+=1;
+            }
+            else{
+                next = next+=1;
+            }
+            if(String(text[next]).substring(0, 5) == "#IMHE"){
+                image.setAttribute("height",String(text[next]).replace('#IMHE', ''));
+            }
             document.getElementById("render-box").appendChild(image);
         }
         else if(String(text[current]).substring(0, 5) == "#DATE"){

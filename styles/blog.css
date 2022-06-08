@@ -6,16 +6,16 @@
 .ubtitle{
     text-align: left;
     font-size: 50px;
-    position: fixed;
+    position: absolute;
     left: 200px;
 }
 .ubimage{
-    position: fixed;
+    position: absolute;
     left: 50px;
 }
 .aboutbuttonpos{
     right: 400px;
-    position: fixed;
+    position: absolute;
 }
 .aboutbutton{
     background-color: #1a1a1a;
@@ -33,7 +33,7 @@
 }
 .postbuttonpos{
     right: 100px;
-    position: fixed;
+    position: absolute;
 }
 .postbutton{
     background-color: #1a1a1a;

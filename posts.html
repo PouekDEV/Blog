@@ -29,16 +29,25 @@
     -->
 </head>
 <body>
-    <div class="upperbar">
+    <div class="upperbar" id="upb">
         <p class="ubtitle">Pouek's Blog</p>
-        <p class="ubimage"><img src="https://www.pouekdev.one/miQZ2R.gif" class="ubimage"></p>
+        <p class="ubimage"><img src="https://www.pouekdev.one/miQZ2R.gif" class="ubimage" style="border-radius: 5px;"></p>
         <p class="aboutbuttonpos"><button class="aboutbutton" onclick="window.location.href='index.html'">About</button></p>
         <p class="postbuttonpos"><button class="postbutton" onclick="postscurrent()">Posts</button></p>
     </div>
     <br>
-    <div style="text-align: left; font-size: 50px; position: fixed; left: 50px;">
-        
+    <div id="posts-box">
+        <!--
+        <div style="background-color: #616161; height: 200px; border-radius: 5px;" onclick="window.location.href='posts.html#lol'">
+            <br>
+            <p style="position: absolute; text-align: right; right: 100px;"><img src="https://www.pouekdev.one/miQZ2R.gif"></p>
+            <p style="font-size: 40px; text-align: left; position: absolute; left: 50px; font-weight: bold;">Lorem ipsum dolor sit amet</p>
+            <br><br><br>
+            <p style="font-size: 30px; text-align: left; position: absolute; left: 50px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius interdum mauris, pharetra mollis nibh lacinia sed. Praesent commodo vel mauris id facilisis. Nunc malesuada nibh mi, eu porta lorem dapibus rhoncus. Vivamus fringilla velit sed arcu imperdiet, vitae dictum augue ullamcorper.</p>
+        </div>
+        -->
     </div>
 </body>
 <script src="js/menu.js"></script>
+<script src="js/posts.js"></script>
 </html>
