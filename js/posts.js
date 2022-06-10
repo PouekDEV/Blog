@@ -1,12 +1,13 @@
 var content;
 var dir = "posts/";
 var fileextension = ".pmd";
+var isloading = true;
 function renderposts(){
     $.ajax({
         url: dir,
         success: function (data) {
             $($(data).find("a:contains(" + fileextension + ")").get().reverse()).each(function () {
-                var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");
+                var filename = this.href.replace(window.location.host, "").replace("http:", "").replace("//","");
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", dir+filename, false);
                 rawFile.onreadystatechange = function ()
@@ -57,13 +58,15 @@ function renderposts(){
                                     istext = true;
                                 }
                                 current += 1;
-                                if(istitle && isimage && istext){
+                                if(String(text[current]).substring(0, 5) == "#NRDY"){
+                                    break;
+                                }
+                                else if(istitle && isimage && istext){
                                     // Assemble
                                     var thebr = document.createElement("BR");
                                     var thebr2 = document.createElement("BR");
                                     var thebr3 = document.createElement("BR");
                                     var thebr4 = document.createElement("BR");
-                                    thediv.appendChild(thebr);
                                     thediv.appendChild(theimagep);
                                     thediv.appendChild(thetitle);
                                     thediv.appendChild(thebr2);
@@ -72,6 +75,10 @@ function renderposts(){
                                     thediv.appendChild(thecontent);
                                     document.getElementById("posts-box").appendChild(thediv);
                                     document.getElementById("posts-box").appendChild(thebr);
+                                    if(isloading){
+                                        isloading = false;
+                                        document.getElementById("filesinfo").style.display = "none";
+                                    }
                                     break;
                                 }
                                 else if(current >= postlength){
@@ -79,7 +86,6 @@ function renderposts(){
                                     var thebr2 = document.createElement("BR");
                                     var thebr3 = document.createElement("BR");
                                     var thebr4 = document.createElement("BR");
-                                    thediv.appendChild(thebr);
                                     thediv.appendChild(theimagep);
                                     thediv.appendChild(thetitle);
                                     thediv.appendChild(thebr2);
@@ -88,6 +94,10 @@ function renderposts(){
                                     thediv.appendChild(thecontent);
                                     document.getElementById("posts-box").appendChild(thediv);
                                     document.getElementById("posts-box").appendChild(thebr);
+                                    if(isloading){
+                                        isloading = false;
+                                        document.getElementById("filesinfo").style.display = "none";
+                                    }
                                     break;
                                 }
                             }
@@ -101,6 +111,7 @@ function renderposts(){
 }
 function check(){
     if(window.location.href.includes("#")){
+        document.getElementById("filesinfo").style.display = "none";
         var path = window.location.hash;
         path = path.replace("#","");
         var heightofrender = $(document).height();

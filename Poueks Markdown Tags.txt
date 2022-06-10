@@ -21,5 +21,6 @@
 #QUOT(STRING) - Adds a quote to the post
 #IMGA(STRING) - Adds small text that you can put under images
 #LANG(LANGAUGECODE) - Defines the language of the post
+#NRDY - When put in the post file, posts.js ignores it when displaying available posts on page
 
 That's all for now
