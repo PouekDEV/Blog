@@ -1,4 +1,5 @@
 var content;
+var specialcontent;
 var dir = "posts/";
 var fileextension = ".pmd";
 var isloading = true;
@@ -48,7 +49,6 @@ function renderposts(){
                                 }
                                 else if(String(text[current]).substring(0, 5) == "#IMAG" && !isimage){
                                     theimage.setAttribute("src",String(text[current]).replace('#IMAG', ''));
-                                    //theimage.setAttribute("width","150");
                                     theimage.setAttribute("height","150");
                                     theimagep.appendChild(theimage);
                                     isimage = true;
@@ -114,6 +114,7 @@ function check(){
         document.getElementById("filesinfo").style.display = "none";
         var path = window.location.hash;
         path = path.replace("#","");
+        var specialpath = "posts/"+path;
         var heightofrender = $(document).height();
         heightofrender = heightofrender - $("#upb").height() - 50;
         var renderer = document.createElement("IFRAME");
@@ -122,6 +123,47 @@ function check(){
         renderer.setAttribute("width",$("#upb").width()-50);
         renderer.setAttribute("height",heightofrender);
         document.getElementById("posts-box").appendChild(renderer);
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", specialpath, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    var allText = rawFile.responseText;
+                    specialcontent = allText;
+                }
+            }
+        }
+        rawFile.send(null);
+        const text = specialcontent.split("\n");
+        var postlength = text.length;
+        var current = 0;
+        var istitle = false;
+        var isimage = false;
+        var istext = false;
+        while(current <= postlength){
+            if(String(text[current]).substring(0, 5) == "#TITL" && !istitle){
+                document.title = String(text[current]).replace('#TITL', '') + " - PouekDEV Blog";
+                document.querySelector('meta[property="og:title"]').setAttribute("content", String(text[current]).replace('#TITL', '') + " - PouekDEV Blog");
+                istitle = true
+            }
+            else if(String(text[current]).substring(0, 5) == "#NOTL" && !istitle){
+                document.title = "Post - PouekDEV Blog";
+                istitle = true;
+            }
+            else if(String(text[current]).substring(0, 5) == "#IMAG" && !isimage){
+                document.querySelector('meta[property="og:image"]').setAttribute("content", String(text[current]).replace('#IMAG', ''));
+                isimage = true;
+            }
+            else if(String(text[current]).substring(0, 5) == "#TEXT" && !istext){
+                document.querySelector('meta[name="description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
+                document.querySelector('meta[property="og:description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
+                istext = true;
+            }
+            current += 1;
+        }
     }
     else{
         renderposts();
