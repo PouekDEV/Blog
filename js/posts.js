@@ -7,7 +7,7 @@ function renderposts(){
         url: dir,
         success: function (data) {
             $($(data).find("a:contains(" + fileextension + ")").get().reverse()).each(function () {
-                var filename = this.href.replace(window.location.host, "").replace("http:", "").replace("//","");
+                var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", dir+filename, false);
                 rawFile.onreadystatechange = function ()
