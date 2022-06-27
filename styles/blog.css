@@ -13,6 +13,12 @@
     position: absolute;
     left: 50px;
 }
+.ubimage:hover{
+    cursor: pointer;
+}
+.pc:hover{
+    cursor: pointer;
+}
 .aboutbuttonpos{
     right: 400px;
     position: absolute;

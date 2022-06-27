@@ -30,6 +30,7 @@ function renderposts(){
                             exclusivefile = exclusivefile.replace("/","");
                             var divattribute = "window.location.href="+"'posts.html#"+exclusivefile+"'; window.location.reload();";
                             thediv.setAttribute("onclick",divattribute);
+                            thediv.setAttribute("class","pc");
                             thediv.style.cssText = "background-color: #616161; height: 200px; border-radius: 5px;";
                             var thetitle = document.createElement("P");
                             thetitle.style.cssText = "font-size: 40px; text-align: left; position: absolute; left: 50px; font-weight: bold;";
