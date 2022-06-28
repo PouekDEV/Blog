@@ -16,8 +16,24 @@
 .ubimage:hover{
     cursor: pointer;
 }
+.pc{
+    background-color: #616161;
+}
+.wrap{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 1400px;
+}
+.wrapnoimage{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 1800px;
+}
 .pc:hover{
     cursor: pointer;
+    background-color: #b3b3b3;
 }
 .aboutbuttonpos{
     right: 400px;
@@ -36,6 +52,7 @@
 }
 .aboutbutton:hover{
     background-color: #505050;
+    cursor: pointer;
 }
 .postbuttonpos{
     right: 100px;
@@ -54,4 +71,5 @@
 }
 .postbutton:hover{
     background-color: #505050;
+    cursor: pointer;
 }

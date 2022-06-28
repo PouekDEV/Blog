@@ -31,7 +31,7 @@ function renderposts(){
                             var divattribute = "window.location.href="+"'posts.html#"+exclusivefile+"'; window.location.reload();";
                             thediv.setAttribute("onclick",divattribute);
                             thediv.setAttribute("class","pc");
-                            thediv.style.cssText = "background-color: #616161; height: 200px; border-radius: 5px;";
+                            thediv.style.cssText = "height: 200px; border-radius: 5px;";
                             var thetitle = document.createElement("P");
                             thetitle.style.cssText = "font-size: 40px; text-align: left; position: absolute; left: 50px; font-weight: bold;";
                             var theimagep = document.createElement("P");
@@ -51,6 +51,8 @@ function renderposts(){
                                 else if(String(text[current]).substring(0, 5) == "#IMAG" && !isimage){
                                     theimage.setAttribute("src",String(text[current]).replace('#IMAG', ''));
                                     theimage.setAttribute("height","150");
+                                    thecontent.setAttribute("class","wrap");
+                                    thetitle.setAttribute("class","wrap");
                                     theimagep.appendChild(theimage);
                                     isimage = true;
                                 }
@@ -83,6 +85,8 @@ function renderposts(){
                                     break;
                                 }
                                 else if(current >= postlength){
+                                    thetitle.setAttribute("class","wrapnoimage");
+                                    thecontent.setAttribute("class","wrapnoimage");
                                     var thebr = document.createElement("BR");
                                     var thebr2 = document.createElement("BR");
                                     var thebr3 = document.createElement("BR");
