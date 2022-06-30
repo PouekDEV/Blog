@@ -1,4 +1,6 @@
 var content;
+var viewportHeight = window.innerHeight;
+var viewportWidth = window.innerWidth;
 var specialcontent;
 var dir = "posts/";
 var fileextension = ".pmd";
@@ -8,7 +10,7 @@ function renderposts(){
         url: dir,
         success: function (data) {
             $($(data).find("a:contains(" + fileextension + ")").get().reverse()).each(function () {
-                var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");
+                var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");//dont't forget the s
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", dir+filename, false);
                 rawFile.onreadystatechange = function ()
@@ -25,6 +27,8 @@ function renderposts(){
                             var istitle = false;
                             var isimage = false;
                             var istext = false;
+                            $(".wrap").css("max-width", viewportWidth-520);
+                            $(".wrapnoimage").css("max-width", viewportWidth-120);
                             var thediv = document.createElement("DIV");
                             var exclusivefile = filename;
                             exclusivefile = exclusivefile.replace("/","");

@@ -1,5 +1,6 @@
 var content;
 var snippet;
+var alltext = "";
 setTimeout(() =>{
     if(window.location.href.includes("#")){
         var path = window.location.hash;
@@ -7,6 +8,16 @@ setTimeout(() =>{
         readTextFile("posts/"+path);
     }
 },100)
+function countWords(str){
+    return str.trim().split(/\s+/).length;
+}
+function readingTime(inputstring){
+    var text = inputstring;
+    var wpm = 225;
+    var words = text.trim().split(/\s+/).length;
+    var time = Math.ceil(words / wpm);
+    document.getElementById("time").innerText = "~" + time + " minute read";
+}
 function readTextFile(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -49,6 +60,7 @@ function render(){
     while(current <= postlength){
         if(String(text[current]).substring(0, 5) == "#TITL"){
             document.getElementById('title').textContent = String(text[current]).replace('#TITL', '');
+            alltext += String(text[current]).replace('#TITL', '');
         }
         else if(String(text[current]).substring(0, 5) == "#LANG"){
             document.documentElement.setAttribute("lang", String(text[current]).replace('#LANG', ''));
@@ -78,6 +90,7 @@ function render(){
             date.appendChild(document.createTextNode(String(text[current]).replace('#DATE', '')));
             date.setAttribute("class","timestamps");
             document.getElementById("render-box").appendChild(date);
+            alltext += String(text[current]).replace('#DATE', '');
         }
         else if(String(text[current]).substring(0, 5) == "#IMGA"){
             var date = document.createElement("P");
@@ -90,18 +103,21 @@ function render(){
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#TEXT', '')));
             textelement.setAttribute("class","normaltext");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#TEXT', '');
         }
         else if(String(text[current]).substring(0, 5) == "#BOLD"){
             var textelement = document.createElement("P");
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#BOLD', '')));
             textelement.setAttribute("class","bold");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#BOLD', '');
         }
         else if(String(text[current]).substring(0, 5) == "#UNDT"){
             var textelement = document.createElement("P");
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#UNDT', '')));
             textelement.setAttribute("class","underline");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#UNDT', '');
         }
         else if(String(text[current]).substring(0, 5) == "#YTEM"){
             var ytembed = document.createElement("IFRAME");
@@ -120,6 +136,7 @@ function render(){
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#TEXR', '')));
             textelement.setAttribute("class","redtext");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#TEXR', '');
         }
         else if(String(text[current]).substring(0, 5) == "#LINK"){
             var next = current;
@@ -127,6 +144,7 @@ function render(){
             var link = document.createElement("A");
             if(String(text[next]).substring(0, 5) == "#LTXT"){
                 link.appendChild(document.createTextNode(String(text[next]).replace('#LTXT', '')));
+                alltext += String(text[current]).replace('#LTXT', '');
             }
             else{
                 link.appendChild(document.createTextNode("link"));
@@ -141,6 +159,7 @@ function render(){
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#HEAD', '')));
             textelement.setAttribute("class","texthead");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#HEAD', '');
         }
         else if(String(text[current]).substring(0, 5) == "#IFRM"){
             var next = current;
@@ -185,8 +204,14 @@ function render(){
             textelement.appendChild(document.createTextNode(String(text[current]).replace('#QUOT', '')));
             textelement.setAttribute("class","normaltext");
             document.getElementById("render-box").appendChild(textelement);
+            alltext += String(text[current]).replace('#QUOT', '');
         }
         current += 1;
+        if(postlength == current){
+            var wordcount = countWords(alltext);
+            document.getElementById("words").innerHTML = wordcount + " words";
+            readingTime(alltext);
+        }
     }
 }
 // Activation function

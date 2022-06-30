@@ -1,4 +1,14 @@
 <html lang="en">
+    <style>
+        span{
+            margin-left:10px;
+        }
+        #image{
+            vertical-align: middle;
+            width: 60px;
+            height: 60px;
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +23,16 @@
 <body>
     <br>
     <p style="font-size: 50px;" id="title"></p>
+    <span style="font-size: 30px;"><img src="src/crayon.png" id="image"><span id="words">---</span><img src="src/clock.png" id="image"><span id="time">---</span></span>
+    <br><br>
     <div id="render-box"></div>
+    <script>
+      var idcomments_acct = 'ca3bd21a251297bea53037e69c240bcf';
+      var idcomments_post_id;
+      var idcomments_post_url;
+    </script>
+    <span id="IDCommentsPostTitle" style="display:none;"></span>
+    <script type='text/javascript' src='https://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
 </body>
 <script src="js/render.js"></script>
 </html>
