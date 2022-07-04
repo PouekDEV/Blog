@@ -121,12 +121,8 @@ function render(){
                 alltext += String(text[current]).replace('#UNDT', '');
                 break;
             case "#YTEM":
-                var ytembed = document.createElement("IFRAME");
-                ytembed.setAttribute("width","560");
-                ytembed.setAttribute("height","315");
-                ytembed.setAttribute("frameborder","0");
-                ytembed.setAttribute("allow","accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-                ytembed.setAttribute("src","https://www.youtube.com/embed/"+String(text[current]).replace('#YTEM', ''));
+                var ytembed = document.createElement("lite-youtube");
+                ytembed.setAttribute("videoid",String(text[current]).replace('#YTEM', ''));
                 document.getElementById("render-box").appendChild(ytembed);
                 break;
             case "#SPAC":
@@ -187,7 +183,7 @@ function render(){
                 break;
             case "#CODE":
                 var next = current;
-                next = next+=1;
+                next = next += 1;
                 var pre = document.createElement("PRE");
                 var code = document.createElement("CODE");
                 readsnippet(String(text[current]).replace('#CODE', ''));
