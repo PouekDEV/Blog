@@ -45,24 +45,34 @@ function renderposts(){
                             var thecontent = document.createElement("P");
                             thecontent.style.cssText = "font-size: 30px; text-align: left; position: absolute; left: 50px;";
                             while(current <= postlength){
-                                if(String(text[current]).substring(0, 5) == "#TITL" && !istitle){
-                                    thetitle.appendChild(document.createTextNode(String(text[current]).replace('#TITL', '')));
-                                    istitle = true
-                                }
-                                else if(String(text[current]).substring(0, 5) == "#NOTL" && !istitle){
-                                    istitle = true;
-                                }
-                                else if(String(text[current]).substring(0, 5) == "#IMAG" && !isimage){
-                                    theimage.setAttribute("src",String(text[current]).replace('#IMAG', ''));
-                                    theimage.setAttribute("height","150");
-                                    thecontent.setAttribute("class","wrap");
-                                    thetitle.setAttribute("class","wrap");
-                                    theimagep.appendChild(theimage);
-                                    isimage = true;
-                                }
-                                else if(String(text[current]).substring(0, 5) == "#TEXT" && !istext){
-                                    thecontent.appendChild(document.createTextNode(String(text[current]).replace('#TEXT', '')))
-                                    istext = true;
+                                switch(String(text[current]).substring(0, 5)){
+                                    case "#TITL":
+                                        if(!istitle){
+                                            thetitle.appendChild(document.createTextNode(String(text[current]).replace('#TITL', '')));
+                                            istitle = true
+                                        }
+                                        break;
+                                    case "#NOTL":
+                                        if(!istitle){
+                                            istitle = true;
+                                        }
+                                        break;
+                                    case "#IMAG":
+                                        if(!isimage){
+                                            theimage.setAttribute("src",String(text[current]).replace('#IMAG', ''));
+                                            theimage.setAttribute("height","150");
+                                            thecontent.setAttribute("class","wrap");
+                                            thetitle.setAttribute("class","wrap");
+                                            theimagep.appendChild(theimage);
+                                            isimage = true;
+                                        }
+                                        break;
+                                    case "#TEXT":
+                                        if(!istext){
+                                            thecontent.appendChild(document.createTextNode(String(text[current]).replace('#TEXT', '')))
+                                            istext = true;
+                                        }
+                                        break;
                                 }
                                 current += 1;
                                 if(String(text[current]).substring(0, 5) == "#NRDY"){
@@ -153,23 +163,33 @@ function check(){
         var isimage = false;
         var istext = false;
         while(current <= postlength){
-            if(String(text[current]).substring(0, 5) == "#TITL" && !istitle){
-                document.title = String(text[current]).replace('#TITL', '') + " - PouekDEV Blog";
-                document.querySelector('meta[property="og:title"]').setAttribute("content", String(text[current]).replace('#TITL', '') + " - PouekDEV Blog");
-                istitle = true
-            }
-            else if(String(text[current]).substring(0, 5) == "#NOTL" && !istitle){
-                document.title = "Post - PouekDEV Blog";
-                istitle = true;
-            }
-            else if(String(text[current]).substring(0, 5) == "#IMAG" && !isimage){
-                document.querySelector('meta[property="og:image"]').setAttribute("content", String(text[current]).replace('#IMAG', ''));
-                isimage = true;
-            }
-            else if(String(text[current]).substring(0, 5) == "#TEXT" && !istext){
-                document.querySelector('meta[name="description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
-                document.querySelector('meta[property="og:description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
-                istext = true;
+            switch(String(text[current]).substring(0, 5)){
+                case "#TITL":
+                    if(!istitle){
+                        document.title = String(text[current]).replace('#TITL', '') + " - PouekDEV Blog";
+                        document.querySelector('meta[property="og:title"]').setAttribute("content", String(text[current]).replace('#TITL', '') + " - PouekDEV Blog");
+                        istitle = true
+                    }
+                    break;
+                case "#NOTL":
+                    if(!istitle){
+                        document.title = "Post - PouekDEV Blog";
+                        istitle = true;
+                    }
+                    break;
+                case "#IMAG":
+                    if(!isimage){
+                        document.querySelector('meta[property="og:image"]').setAttribute("content", String(text[current]).replace('#IMAG', ''));
+                        isimage = true;
+                    }
+                    break;
+                case "#TEXT":
+                    if(!istext){
+                        document.querySelector('meta[name="description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
+                        document.querySelector('meta[property="og:description"]').setAttribute("content", String(text[current]).replace('#TEXT', ''));
+                        istext = true;
+                    }
+                    break;
             }
             current += 1;
         }
