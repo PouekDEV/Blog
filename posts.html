@@ -14,10 +14,6 @@
     <meta property="og:image" content="https://www.pouekdev.one/miQZ2R.gif" />
     <link rel="stylesheet" href="https://www.pouekdev.one/style.css">
     <link rel="stylesheet" href="styles/blog.css">
-    <script src="js/vex.combined.min.js"></script>
-    <script>vex.defaultOptions.className = 'vex-theme-os'</script>
-    <link rel="stylesheet" href="styles/vex.css"/>
-    <link rel="stylesheet" href="styles/vex-theme-os.css"/>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZ4YJ36K6F"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -32,6 +28,15 @@
         <p class="ubimage"><img src="https://www.pouekdev.one/miQZ2R.gif" onclick="window.location.href='https://pouekdev.github.io'" class="ubimage" style="border-radius: 5px;"></p>
         <p class="aboutbuttonpos"><button class="aboutbutton" onclick="window.location.href='index.html'">About</button></p>
         <p class="postbuttonpos"><button class="postbutton" onclick="postscurrent()">Posts</button></p>
+        <input class="filterbuttonpos" type="image" src="src/filter.png" alt="Filter posts by tags or by date" onclick="togglefilters()">
+    </div>
+    <br>
+    <div class="filterbar" id="filters">
+        <br>
+        <p>Filter options</p>
+        <br>
+        <a href="posts.html?filter=oldest">by oldest</a>
+        <a href="posts.html" id="last">| by newest</a>
     </div>
     <br>
     <div id="posts-box">
