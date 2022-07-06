@@ -302,6 +302,7 @@ function processtags(){
 }
 function check(){
     if(window.location.href.includes("?post")){
+        document.getElementById("filtersbutton").style.display = "none";
         var $_GET = {};
         if(document.location.toString().indexOf('?') !== -1) {
             var query = document.location.toString().replace(/^.*?\?/, '').replace(/#.*$/, '').split('&');
