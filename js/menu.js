@@ -16,4 +16,6 @@ function togglefilters(){
         document.getElementById("filters").style.display = "block";
     }
 }
-document.getElementById("filters").style.display = "none";
+if(window.location.href.includes("posts.html")){
+    document.getElementById("filters").style.display = "none";
+}

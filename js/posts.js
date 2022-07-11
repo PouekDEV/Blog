@@ -320,6 +320,7 @@ function check(){
         renderer.setAttribute("width",$("#upb").width()-50);
         renderer.setAttribute("height",heightofrender);
         document.getElementById("posts-box").appendChild(renderer);
+        var specialpath = "posts/"+$_GET['post'];
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", specialpath, false);
         rawFile.onreadystatechange = function ()
