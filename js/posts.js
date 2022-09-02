@@ -21,7 +21,7 @@ function renderposts(){
             if($_GET['filter'] == "oldest"){
                 // Do this...
                 $($(data).find("a:contains(" + fileextension + ")").get()).each(function (){
-                    var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");//dont't forget the s
+                    var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("https://","");//dont't forget the s
                     var rawFile = new XMLHttpRequest();
                     rawFile.open("GET", dir+filename, false);
                     rawFile.onreadystatechange = function ()
@@ -38,6 +38,7 @@ function renderposts(){
                                 var istitle = false;
                                 var isimage = false;
                                 var istext = false;
+                                var isdate = false;
                                 $(".wrap").css("max-width", viewportWidth-520);
                                 $(".wrapnoimage").css("max-width", viewportWidth-120);
                                 var thediv = document.createElement("DIV");
@@ -55,6 +56,8 @@ function renderposts(){
                                 theimage.style.cssText = "border-radius: 5px;";
                                 var thecontent = document.createElement("P");
                                 thecontent.style.cssText = "font-size: 30px; text-align: left; position: absolute; left: 50px;";
+                                var thedate = document.createElement("P");
+                                thedate.style.cssText = "font-size: 20px; position: absolute; text-align: left; left:50px;";
                                 var isnottherightag = false;
                                 while(current <= postlength){
                                     switch(String(text[current]).substring(0, 5)){
@@ -88,12 +91,16 @@ function renderposts(){
                                         case "#TAGS":
                                             tags += String(text[current]).replace('#TAGS', ' ')
                                             break;
+                                        case "#DATE":
+                                            thedate.appendChild(document.createTextNode(String(text[current]).replace('#DATE', '')))
+                                            isdate = true;
+                                            break;
                                     }
                                     current += 1;
                                     if(String(text[current]).substring(0, 5) == "#NRDY"){
                                         break;
                                     }
-                                    else if(istitle && isimage && istext){
+                                    else if(istitle && isimage && istext && isdate){
                                         // Assemble
                                         var thebr = document.createElement("BR");
                                         var thebr2 = document.createElement("BR");
@@ -105,6 +112,12 @@ function renderposts(){
                                         thediv.appendChild(thebr3);
                                         thediv.appendChild(thebr4);
                                         thediv.appendChild(thecontent);
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(thedate);
                                         document.getElementById("posts-box").appendChild(thediv);
                                         document.getElementById("posts-box").appendChild(thebr);
                                         if(isloading){
@@ -126,6 +139,12 @@ function renderposts(){
                                         thediv.appendChild(thebr3);
                                         thediv.appendChild(thebr4);
                                         thediv.appendChild(thecontent);
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(thedate);
                                         document.getElementById("posts-box").appendChild(thediv);
                                         document.getElementById("posts-box").appendChild(thebr);
                                         if(isloading){
@@ -145,7 +164,7 @@ function renderposts(){
             else{
                 // and this in a better way
                 $($(data).find("a:contains(" + fileextension + ")").get().reverse()).each(function (){
-                    var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");//dont't forget the s
+                    var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("https://","");//dont't forget the s
                     var rawFile = new XMLHttpRequest();
                     rawFile.open("GET", dir+filename, false);
                     rawFile.onreadystatechange = function ()
@@ -162,6 +181,7 @@ function renderposts(){
                                 var istitle = false;
                                 var isimage = false;
                                 var istext = false;
+                                var isdate = false;
                                 $(".wrap").css("max-width", viewportWidth-520);
                                 $(".wrapnoimage").css("max-width", viewportWidth-120);
                                 var thediv = document.createElement("DIV");
@@ -179,6 +199,8 @@ function renderposts(){
                                 theimage.style.cssText = "border-radius: 5px;";
                                 var thecontent = document.createElement("P");
                                 thecontent.style.cssText = "font-size: 30px; text-align: left; position: absolute; left: 50px;";
+                                var thedate = document.createElement("P");
+                                thedate.style.cssText = "font-size: 20px; position: absolute; text-align: left; left:50px;";
                                 var isnottherightag = false;
                                 while(current <= postlength){
                                     switch(String(text[current]).substring(0, 5)){
@@ -223,6 +245,10 @@ function renderposts(){
                                             }
                                             tags += String(text[current]).replace('#TAGS', ' ')
                                             break;
+                                        case "#DATE":
+                                            thedate.appendChild(document.createTextNode(String(text[current]).replace('#DATE', '')))
+                                            isdate = true;
+                                            break;
                                     }
                                     current += 1;
                                     if(isnottherightag){
@@ -231,7 +257,7 @@ function renderposts(){
                                     if(String(text[current]).substring(0, 5) == "#NRDY"){
                                         break;
                                     }
-                                    else if(istitle && isimage && istext){
+                                    else if(istitle && isimage && istext && isdate){
                                         // Assemble
                                         var thebr = document.createElement("BR");
                                         var thebr2 = document.createElement("BR");
@@ -243,6 +269,12 @@ function renderposts(){
                                         thediv.appendChild(thebr3);
                                         thediv.appendChild(thebr4);
                                         thediv.appendChild(thecontent);
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(thedate);
                                         document.getElementById("posts-box").appendChild(thediv);
                                         document.getElementById("posts-box").appendChild(thebr);
                                         if(isloading){
@@ -264,6 +296,12 @@ function renderposts(){
                                         thediv.appendChild(thebr3);
                                         thediv.appendChild(thebr4);
                                         thediv.appendChild(thecontent);
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(thedate);
                                         document.getElementById("posts-box").appendChild(thediv);
                                         document.getElementById("posts-box").appendChild(thebr);
                                         if(isloading){
