@@ -3,11 +3,17 @@ body{
     color: #ffffff;
     font-family: "Courier New";
     margin: auto;
+}
+.title{
+    text-align: center;
+}
+.image{
     text-align: center;
 }
 .timestamps{
     font-size: 15px;
     color: gray;
+    text-align: center;
 }
 .normaltext{
     font-size: 30px;
@@ -30,15 +36,18 @@ body{
 }
 .texthead{
     font-size: 50px;
+    text-align: center;
 }
 .websiteembed{
     resize: both;
     overflow: auto;
+    text-align: center;
 }
 code {
     text-align: left;
 }
 .imageattribution{
+    text-align: center;
     font-size: 20px;
     color: rgb(172, 172, 172);
 }

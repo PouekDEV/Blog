@@ -38,6 +38,15 @@ function readTextFile(file)
                 content = allText;
                 render();
             }
+            else{
+                setInterval(() => {
+                    if(document.getElementById("idc-container").style.display != "none"){
+                        document.getElementById("idc-container").style.display = "none";
+                    }
+                },1000)
+                document.getElementById("up").style.display = "none";
+                readTextFile("404.pmd");
+            }
         }
     }
     rawFile.send(null);
@@ -79,6 +88,8 @@ function render(){
                 var next = current;
                 next = next+=1;
                 var image = document.createElement("IMG");
+                var p = document.createElement("P");
+                p.setAttribute("class","image");
                 image.setAttribute("src",String(text[current]).replace('#IMAG', ''));
                 if(String(text[next]).substring(0, 5) == "#IMWI"){
                     image.setAttribute("width",String(text[next]).replace('#IMWI', ''));
@@ -90,7 +101,8 @@ function render(){
                 if(String(text[next]).substring(0, 5) == "#IMHE"){
                     image.setAttribute("height",String(text[next]).replace('#IMHE', ''));
                 }
-                document.getElementById("render-box").appendChild(image);
+                p.appendChild(image);
+                document.getElementById("render-box").appendChild(p);
                 break;
             case "#DATE":
                 var date = document.createElement("P");
