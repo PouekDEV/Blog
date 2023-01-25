@@ -1,8 +1,20 @@
 body{
-    background-color: #202020;
+    background-color: #1b1b1b;
     color: #ffffff;
     font-family: "Courier New";
     margin: auto;
+}
+span{
+    margin-left:10px;
+}
+#image{
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+}
+#tag:hover{
+    color: gold;
+    cursor: pointer;
 }
 .title{
     text-align: center;
