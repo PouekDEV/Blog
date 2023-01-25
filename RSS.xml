@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Pouek's Blog</title>
+        <link>https://blog.pouekdev.one/</link>
+        <description>Pouek's all-over-the-place blog</description>
+    </channel>
+    <item>
+        <title>I don't care about cookies extension has been acquired by Avast</title>
+        <link>?post=3-idontcareaboutcookies.pmd</link>
+        <guid>?post=3-idontcareaboutcookies.pmd</guid>
+        <pubDate>Thu, 15 Sep 2022</pubDate>
+        <description>Yes, you read it right. Avast has acquired the "I don't care about cookies" extension.</description>
+    </item>
+    <item>
+        <title>pythOwO Why the heck did someone makes this a thing?!</title>
+        <link>?post=2-pythowo.pmd</link>
+        <guid>?post=2-pythowo.pmd</guid>
+        <pubDate>Tue, 28 Jun 2022</pubDate>
+        <description>A couple of days ago on r/ProgrammerHumor, I found a guy who made an annoucement where he said that he made a pythOwO language a thing.</description>
+    </item>
+    <item>
+        <title>DALL-E Mini: How AI art can be wonderful</title>
+        <link>?post=1-dallemini.pmd</link>
+        <guid>?post=1-dallemini.pmd</guid>
+        <pubDate>Sun, 12 Jun 2022</pubDate>
+        <description>Today I was browsing YouTube when I found a video from Markiplier titled "DALL-E Mini: A Meme Nightmare".</description>
+    </item>
+</rss>

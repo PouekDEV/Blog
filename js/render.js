@@ -1,6 +1,8 @@
 var content;
 var snippet;
 var alltext = "";
+var viewportHeight = window.innerHeight;
+var viewportWidth = window.innerWidth;
 setTimeout(() =>{
     if(window.location.href.includes("?")){
         var $_GET = {};
@@ -78,6 +80,26 @@ function render(){
                 document.getElementById('title').textContent = String(text[current]).replace('#TITL', '');
                 alltext += String(text[current]).replace('#TITL', '');
                 break;
+            case "#TAGS":
+                var tags = String(text[current]).replace('#TAGS', ' ')
+                var tagslist = tags.trim().split(/\s+/);
+                tagslist = new Set(tagslist)
+                tagslist = Array.from(tagslist)
+                var tagslistlength = tagslist.length;
+                var current = 0;
+                var div = document.createElement("DIV");
+                div.setAttribute("style","font-size: 30px; text-align: center;");
+                while(current != tagslistlength){
+                    var newtag = document.createElement("A");
+                    newtag.setAttribute("id","tag");
+                    newtag.setAttribute("onclick","window.open('index.html?tag="+tagslist[current]+"')");
+                    newtag.appendChild(document.createTextNode("#" + tagslist[current] + "\n"));
+                    div.appendChild(newtag);
+                    current += 1;
+                }
+                document.getElementById("render-box").appendChild(div);
+                document.getElementById("render-box").appendChild(document.createElement("BR"));
+                break;
             case "#LANG":
                 document.documentElement.setAttribute("lang", String(text[current]).replace('#LANG', ''));
                 break;
@@ -101,6 +123,13 @@ function render(){
                 if(String(text[next]).substring(0, 5) == "#IMHE"){
                     image.setAttribute("height",String(text[next]).replace('#IMHE', ''));
                 }
+                var img = new Image();
+                img.onload = function() {
+                    if(this.width > viewportWidth){
+                        image.setAttribute("width",viewportWidth);
+                    }
+                }
+                img.src = String(text[current]).replace('#IMAG', '');
                 p.appendChild(image);
                 document.getElementById("render-box").appendChild(p);
                 break;

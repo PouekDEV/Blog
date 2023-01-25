@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>About - PouekDEV Blog</title>
+    <title>Posts - PouekDEV Blog</title>
     <link rel="icon" href="https://www.pouekdev.one/miQZ2R.gif">
-    <meta name="description" content="Hello! Welcome to my blog!">
+    <meta name="description" content="Pouek's all-over-the-place blog">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Pouek's Blog" />
-    <meta property="og:description" content="Hello! Welcome to my blog!" />
+    <meta property="og:description" content="Pouek's all-over-the-place blog" />
     <meta property="og:url" content="blog.pouekdev.one" />
     <meta property="og:image" content="https://www.pouekdev.one/miQZ2R.gif" />
-    <link rel="stylesheet" href="https://www.pouekdev.one/style.css">
     <link rel="stylesheet" href="styles/blog.css">
-    <script src="js/vex.combined.min.js"></script>
-    <script>vex.defaultOptions.className = 'vex-theme-os'</script>
-    <link rel="stylesheet" href="styles/vex.css"/>
-    <link rel="stylesheet" href="styles/vex-theme-os.css"/>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZ4YJ36K6F"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -27,15 +22,37 @@
         gtag('config', 'G-KZ4YJ36K6F');
     </script>
 </head>
-<body>
-    <div class="upperbar">
-        <p class="ubtitle">Pouek's Blog</p>
-        <p class="ubimage"><img src="https://www.pouekdev.one/miQZ2R.gif" onclick="window.location.href='https://pouekdev.github.io'" class="ubimage" style="border-radius: 5px;"></p>
-        <p class="aboutbuttonpos"><button class="aboutbutton" onclick="aboutcurrent()">About</button></p>
-        <p class="postbuttonpos"><button class="postbutton" onclick="window.location.href='posts.html'">Posts</button></p>
+<body id="body">
+    <div class="upperbar" id="upb">
+        <input class="rssbuttonpos" type="image" src="src/rss.png" alt="rss" onclick="window.open('RSS.xml')">
+        <p class="ubtitle" onclick="window.location.href='index.html'">Pouek's Blog</p>
+        <input class="filterbuttonpos" type="image" src="src/filter.png" alt="Filter posts by tags or by date" onclick="togglefilters()" id="filtersbutton">
+        <hr>
     </div>
-    <br>
-    <p style="text-align: left; font-size: 50px; position: absolute; left: 50px;">Hello! <br><br> Welcome to my blog where I put funny stuff, updates to my games, and much more. <br> I warn you that this is the place for most random stuff you will ever see on the internet with no consistency in the content.</p>
+    <br><br>
+    <div class="filterbar" id="filters">
+        <br>
+        <br>
+        <p>Filter by tags</p>
+        <br>
+        <br>
+    </div>
+    <br><br>
+    <div id="posts-box">
+        <p style="text-align: center; font-size: 60px;" id="filesinfo">Loading posts</p>
+        <!--
+        <br>
+        <div style="background-color: #616161; height: 200px; border-radius: 5px;" onclick="window.location.href='?post=lol'">
+            <br>
+            <p style="position: absolute; text-align: right; right: 100px;"><img src="https://www.pouekdev.one/miQZ2R.gif"></p>
+            <p style="font-size: 40px; text-align: left; position: absolute; left: 50px; font-weight: bold;">Lorem ipsum dolor sit amet</p>
+            <br><br><br>
+            <p style="font-size: 30px; text-align: left; position: absolute; left: 50px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <br>
+    -->
+    </div>
 </body>
 <script src="js/menu.js"></script>
+<script src="js/posts.js"></script>
 </html>

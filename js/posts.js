@@ -7,6 +7,11 @@ var fileextension = ".pmd";
 var isloading = true;
 var tags = "";
 function renderposts(){
+    if(viewportWidth < 520){
+        document.getElementById("posts-box").appendChild(document.createElement("BR"));
+        document.getElementById("posts-box").appendChild(document.createElement("BR"));
+        document.getElementById("posts-box").appendChild(document.createElement("BR"));
+    }
     $.ajax({
         url: dir,
         success: function (data) {
@@ -37,27 +42,44 @@ function renderposts(){
                             var isimage = false;
                             var istext = false;
                             var isdate = false;
-                            $(".wrap").css("max-width", viewportWidth-520);
-                            $(".wrapnoimage").css("max-width", viewportWidth-120);
                             var thediv = document.createElement("DIV");
                             var exclusivefile = filename;
                             exclusivefile = exclusivefile.replace("/","");
-                            var divattribute = "window.location.href="+"'posts.html?post="+exclusivefile+"';";
+                            var divattribute = "window.location.href="+"'?post="+exclusivefile+"';";
                             thediv.setAttribute("onclick",divattribute);
                             thediv.setAttribute("class","pc");
-                            thediv.style.cssText = "height: 200px; border-radius: 5px;";
                             var thetitle = document.createElement("P");
-                            thetitle.style.cssText = "font-size: 40px; text-align: left; position: absolute; left: 50px; font-weight: bold;";
                             var theimagep = document.createElement("P");
-                            theimagep.style.cssText = "position: absolute; text-align: right; right: 100px;";
                             var theimage = document.createElement("IMG");
                             theimage.style.cssText = "border-radius: 5px;";
                             var thecontent = document.createElement("P");
-                            thecontent.style.cssText = "font-size: 30px; text-align: left; position: absolute; left: 50px;";
                             var thedate = document.createElement("P");
-                            thedate.style.cssText = "font-size: 20px; position: absolute; text-align: left; left:50px;";
+                            // Phone
+                            if(viewportWidth < 520){
+                                $(".wrap").css("max-width", viewportWidth);
+                                $(".wrap").css("white-space", "normal");
+                                //$(".wrap").css("max-height", viewportHeight);
+                                thediv.style.cssText = "border-radius: 5px;";
+                                thecontent.setAttribute("style","font-size: 30px;white-space:normal; max-width:"+(viewportWidth)+"px;");
+                                thetitle.setAttribute("style","font-size: 40px;font-weight: bold; white-space:normal;max-width:"+(viewportWidth)+"px;");
+                                thedate.style.cssText = "font-size: 20px;";
+                            }
+                            // Computer
+                            else{
+                                $(".wrap").css("max-width", viewportWidth-520);
+                                $(".wrapnoimage").css("max-width", viewportWidth-120);
+                                thediv.style.cssText = "height: 200px; border-radius: 5px;";
+                                theimagep.style.cssText = "position: absolute;right: 100px;";
+                                // For some reason this works
+                                thecontent.setAttribute("style","font-size: 30px; position: absolute; left: 50px; max-width:"+(viewportWidth-520)+"px;");
+                                thetitle.setAttribute("style","font-size: 40px; position: absolute; left: 50px; font-weight: bold; max-width:"+(viewportWidth-520)+"px;");
+                                // But this doesn't work
+                                //thecontent.style.cssText = "font-size: 30px; position: absolute; left: 50px;";
+                                //thetitle.style.cssText = "font-size: 40px; position: absolute; left: 50px; font-weight: bold;";
+                                thedate.style.cssText = "font-size: 20px; position: absolute; left:50px;";
+                            }
                             var isnottherightag = false;
-                            while(current <= postlength){
+                            while(current <= postlength+1){
                                 switch(String(text[current]).substring(0, 5)){
                                     case "#TITL":
                                         if(!istitle){
@@ -114,24 +136,26 @@ function renderposts(){
                                 }
                                 else if(istitle && isimage && istext && isdate){
                                     // Assemble
-                                    var thebr = document.createElement("BR");
-                                    var thebr2 = document.createElement("BR");
-                                    var thebr3 = document.createElement("BR");
-                                    var thebr4 = document.createElement("BR");
-                                    thediv.appendChild(theimagep);
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(theimagep);
+                                    }
                                     thediv.appendChild(thetitle);
-                                    thediv.appendChild(thebr2);
-                                    thediv.appendChild(thebr3);
-                                    thediv.appendChild(thebr4);
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                    }
                                     thediv.appendChild(thecontent);
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                    }
                                     thediv.appendChild(thedate);
                                     document.getElementById("posts-box").appendChild(thediv);
-                                    document.getElementById("posts-box").appendChild(thebr);
+                                    document.getElementById("posts-box").appendChild(document.createElement("BR"));
                                     if(isloading){
                                         isloading = false;
                                         document.getElementById("filesinfo").style.display = "none";
@@ -141,24 +165,26 @@ function renderposts(){
                                 else if(current >= postlength){
                                     thetitle.setAttribute("class","wrapnoimage");
                                     thecontent.setAttribute("class","wrapnoimage");
-                                    var thebr = document.createElement("BR");
-                                    var thebr2 = document.createElement("BR");
-                                    var thebr3 = document.createElement("BR");
-                                    var thebr4 = document.createElement("BR");
-                                    thediv.appendChild(theimagep);
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(theimagep);
+                                    }
                                     thediv.appendChild(thetitle);
-                                    thediv.appendChild(thebr2);
-                                    thediv.appendChild(thebr3);
-                                    thediv.appendChild(thebr4);
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                    }
                                     thediv.appendChild(thecontent);
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
-                                    thediv.appendChild(document.createElement("BR"));
+                                    if(viewportWidth > 520){
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                        thediv.appendChild(document.createElement("BR"));
+                                    }
                                     thediv.appendChild(thedate);
                                     document.getElementById("posts-box").appendChild(thediv);
-                                    document.getElementById("posts-box").appendChild(thebr);
+                                    document.getElementById("posts-box").appendChild(document.createElement("BR"));
                                     if(isloading){
                                         isloading = false;
                                         document.getElementById("filesinfo").style.display = "none";
@@ -170,7 +196,13 @@ function renderposts(){
                     }
                 }
                 rawFile.send(null);
+                if(viewportWidth < 520){
+                    document.getElementById("posts-box").appendChild(document.createElement("HR"));
+                }
             });
+            if(viewportWidth > 520){
+                document.getElementById("posts-box").appendChild(document.createElement("HR"));
+            }
             processtags();
         }
     });
@@ -181,16 +213,17 @@ function processtags(){
     tagslist = Array.from(tagslist)
     var tagslistlength = tagslist.length;
     var current = 0;
-    while(current <= tagslistlength){
+    while(current != tagslistlength){
         var newtagfilter = document.createElement("A");
-        newtagfilter.setAttribute("href","posts.html?tag="+tagslist[current]);
+        newtagfilter.setAttribute("href","?tag="+tagslist[current]);
         newtagfilter.appendChild(document.createTextNode("| " + tagslist[current] + "\n"));
         document.getElementById("filters").appendChild(newtagfilter);
         current += 1;
-        if(current == tagslistlength){
-            break;
-        }
     }
+    document.getElementById("filters").appendChild(document.createElement("BR"));
+    document.getElementById("filters").appendChild(document.createElement("BR"));
+    document.getElementById("filters").appendChild(document.createElement("BR"));
+    document.getElementById("filters").appendChild(document.createElement("HR"));
 }
 function check(){
     if(window.location.href.includes("?post")){
@@ -212,6 +245,8 @@ function check(){
         renderer.setAttribute("width",$("#upb").width()-50);
         renderer.setAttribute("height",heightofrender);
         document.getElementById("posts-box").appendChild(renderer);
+        // Redo this in PHP you idiot
+        // At least some parts of it
         var specialpath = "posts/"+$_GET['post'];
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", specialpath, false);
