@@ -13,7 +13,18 @@ setTimeout(() =>{
                $_GET[aux[0]] = aux[1];
             }
         }
-        readTextFile("posts/"+$_GET['post']);
+        if(!window.location.href.includes("&")){
+            readTextFile("posts/"+$_GET['post']);
+        }
+        else{
+            setInterval(() => {
+                if(document.getElementById("idc-container").style.display != "none"){
+                    document.getElementById("idc-container").style.display = "none";
+                }
+            },1000)
+            content = $_GET['content'];
+            render();
+        }
     }
 },100)
 function countWords(str){

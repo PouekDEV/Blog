@@ -24,7 +24,7 @@ function renderposts(){
                 }
             }
             $($(data).find("a:contains(" + fileextension + ")").get().reverse()).each(function (){
-                var filename = this.href.replace(window.location.host, "").replace("https:", "").replace("//","");//dont't forget the s
+                var filename = this.href.replace(window.location.host, "").replace("http:", "").replace("//","");//dont't forget the s
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", dir+filename, false);
                 rawFile.onreadystatechange = function ()
