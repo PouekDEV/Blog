@@ -1,3 +1,4 @@
+#Rework some parts to fit the new standard
 import sys
 import os
 import datetime

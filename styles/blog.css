@@ -11,7 +11,7 @@ a, div, h4, h5, h6, p{
     text-decoration: none;
 }
 span{
-    margin-left: 0px !important;
+    margin-left: 0px;
 }
 img, iframe{
     max-width: 100%;
@@ -19,4 +19,16 @@ img, iframe{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.plain{
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 25px;
+}
+.links{
+    display: inline-block;
+    margin-right: 0px;
+    font-size: 25px;
+    color: white;
 }
