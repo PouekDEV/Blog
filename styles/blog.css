@@ -1,11 +1,27 @@
 body{
-    background-color: rgb(0, 0, 0);
+    background-color: black;
     font-family: "Courier New";
     color: white;
 }
 #post div:hover{
     background-color: rgb(40, 40, 40);
     cursor: pointer;
+}
+.card{
+    background-color: rgb(33, 33, 33);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+}
+#searchCollapse.show{
+    display: inline-block;
+}
+#searchCollapse.collapsing{
+    display: inline-block;
+}
+.functional-buttons{
+    display: inline-block !important;
+    vertical-align: text-bottom !important;
 }
 a, div, h4, h5, h6, p{
     text-decoration: none;
@@ -25,10 +41,12 @@ img, iframe{
     background-color: rgb(0, 0, 0);
     color: white;
     font-size: 25px;
+    vertical-align: middle;
 }
 .links{
     display: inline-block;
     margin-right: 0px;
     font-size: 25px;
     color: white;
+    vertical-align: middle;
 }

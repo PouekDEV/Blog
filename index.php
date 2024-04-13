@@ -77,13 +77,32 @@
     <div class="p-5 text-center">
         <h1 class="mb-3" style="display: inline-block;"><a href="index.php" style="color: white;">Pouek's Blog</a></h1>
         <a href="RSS.xml" class="links"><i class="bi bi-rss-fill"></i></a><br>
-        <a class="links" href="https://www.pouekdev.one"><i class="bi bi-arrow-90deg-up"></i></a>
-        <button class="plain"><i class="bi bi-funnel-fill"></i></button>
-        <button class="plain"><i class="bi bi-search"></i></button>
+        <?php
+            if(!isset($_GET["post"])){
+        ?>
+        <div class="functional-buttons">
+            <a class="links" href="https://www.pouekdev.one"><i class="bi bi-arrow-90deg-up"></i></a>
+            <button class="plain" data-bs-toggle="collapse" data-bs-target="#tagsCollapse" aria-expanded="false" aria-controls="tagsCollapse"><i class="bi bi-funnel-fill"></i></button>
+            <div class="collapse collapse-horizontal" id="searchCollapse" style="vertical-align: middle;">
+                <div class="card card-body" style="width: 250px; background-color: black;">
+                    <input type="text" name="search" id="search">
+                </div>
+            </div>
+            <button class="plain" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse" onclick="search()"><i class="bi bi-search"></i></button>
+            <div class="collapse" id="tagsCollapse">
+                <div class="card card-body" id="tags" style="display: inline-block;">
+                    <p>Tags</p>
+                </div>
+            </div>
+        </div>
+        <?php
+            }
+        ?>
     </div>
     <div class="d-flex justify-content-center container" style="display: block !important;">
         <?php
             if(!isset($_GET["post"])){
+                $tags = array();
                 $files = array_diff(scandir($path,SCANDIR_SORT_DESCENDING), array('.', '..', 'snippets'));
                 foreach($files as $file){
                     $post = file_get_contents($path.$file);
@@ -92,6 +111,7 @@
                     $description = "";
                     $date = "";
                     $thumbnail = "";
+                    $tag = false;
                     foreach($post as $line){
                         if(str_contains($line,"#NRDY")){
                             break;
@@ -109,12 +129,23 @@
                         if(str_contains($line,"#THBN") && $thumbnail == ""){
                             $thumbnail = str_replace("#THBN","",$line);
                         }
-                        if($title != "" && $description != "" && $date != "" && $thumbnail != ""){
+                        if(str_contains($line,"#TAGS") && !$tag){
+                            $tg = str_replace("#TAGS","",$line);
+                            $tg = ltrim($tg);
+                            $tg = explode(" ",$tg);
+                            foreach($tg as $t){
+                                if(!in_array($t,$tags)){
+                                    array_push($tags,$t);
+                                }
+                            }
+                            $tag = true;
+                        }
+                        if($title != "" && $description != "" && $date != "" && $thumbnail != "" && $tag){
                             break;
                         }
                     }
                     echo '<a href="?post='.$file.'">';
-                    echo '<div class="card" style="background-color: rgb(33, 33, 33); margin-right: auto; margin-left: auto; max-width: 1000px;" id="post">';
+                    echo '<div class="card" id="post">';
                     if($thumbnail != ""){
                         echo '<img src="'.$thumbnail.'" alt="thumbnail">';
                     }
@@ -220,7 +251,7 @@
         ?>
         <!--
         <a href="#">
-            <div class="card" style="background-color: rgb(33, 33, 33); margin-right: auto; margin-left: auto; max-width: 1000px;" id="post">
+            <div class="card" style="background-color: rgb(33, 33, 33);" id="post">
                 <img src="https://placehold.co/1000x400" alt="thumbnail">
                 <div class="card-body text-white">
                     <h4 class="card-title" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: bold;">Special title treatment</h4>
@@ -233,6 +264,20 @@
         -->
     </div>
 </body>
+<?php
+    foreach($tags as $tag){
+        echo 
+        "<script>
+            var button = document.createElement(`a`);
+            button.setAttribute(`role`,`button`);
+            button.setAttribute(`class`,`btn btn-dark`);
+            button.setAttribute(`href`,`?tag=".$tag."`);
+            button.setAttribute(`style`,`margin: 5px; background-color: black;`);
+            button.appendChild(document.createTextNode(`".$tag."`));
+            document.getElementById(`tags`).appendChild(button);
+        </script>";
+    }
+?>
 <script>
     hljs.highlightAll();
 </script>
