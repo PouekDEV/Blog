@@ -1,12 +1,8 @@
-var arefilterson = false;
-function togglefilters(){
-    if(arefilterson){
-        arefilterson = false;
-        document.getElementById("filters").style.display = "none";
-    }
-    else{
-        arefilterson = true;
-        document.getElementById("filters").style.display = "block";
+function search(){
+    var text = document.getElementById("search").value;
+    if(text != ""){
+        var here = new URL(window.location.href);
+        here.searchParams.append("search", text);
+        window.location.href = here;
     }
 }
-document.getElementById("filters").style.display = "none";

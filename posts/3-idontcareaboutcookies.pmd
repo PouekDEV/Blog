@@ -1,18 +1,13 @@
-#TAGSnews programming
+#TAGS news programming
 #TITL I don't care about cookies extension has been acquired by Avast
-#IMAGhttps://lh3.googleusercontent.com/sCLTYpGX0VcVootQ_XaFQ9saRIhVWu79ngSzY5eTZ5evRpJ_Q27OdvxA4RrOoZXP7Q4enFh-u6VhxObcJLfARw1g=w128-h128-e365-rj-sc0x00ffffff
+#DATE Thursday September 15, 2022
 #TEXT Yes, you read it right. Avast has acquired the "I don't care about cookies" extension.
-#SPAC
-#SPAC
+#NWLN
 #TEXT Today I opened my browser and got greeted by a new window opened to news from the "I don't care about cookies" website. The page said that Avast had acquired the extension. The full quote is:
-#IMAGhttps://cdn.pouekdev.one/images/cookiesgetrektbyavast.png
-#SPAC
-#SPAC
-#LINKhttps://www.i-dont-care-about-cookies.eu/whats-new/acquisition/
-#LTXT Link to source
-#SPAC
+#IMAG https://blog.pouekdev.one/posts/img/cookiesgetrektbyavast.png
+#LINK https://www.i-dont-care-about-cookies.eu/whats-new/acquisition/ ~ Link to source ~ true
+#NWLN
 #TEXT Some people on Reddit speculate that this text was a form of accepting Avast's offer because let's be real. No sane person would say that Avast is a "trustworthy IT company", especially after all these controversies about illegal data harvesting from their users.
-#BOLD Generally speaking, I'm shocked.
+#TEXT Generally speaking, I'm shocked. ~ 20px ~ false ~ white ~ font-weight: bold;
 #TEXT I think it's time to dump the extension and use the filter block list for uBlock Origin instead just for better privacy.
 #TEXT But what do you think?
-#DATE Thursday September 15, 2022
