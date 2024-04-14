@@ -1,4 +1,3 @@
-#Rework some parts to fit the new standard
 import sys
 import os
 import datetime
@@ -43,11 +42,18 @@ else:
         try:
             line.index("#TEXT")
         except ValueError:
-            pass
+            try:
+                line.index("#DESC")
+            except ValueError:
+                pass
+            else:
+                description_text = line.replace("#DESC","")
+                break
         else:
-            description_text = line
+            description_text = line.replace("#TEXT","")
+            description_text = description_text.split("~")
+            description_text = description_text[0]
             break
-    description_text = description_text.replace("#TEXT","")
     description_text = description_text[:-1]
     description_text += " [...]"
     description = ET.Element("description")

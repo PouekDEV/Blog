@@ -1,6 +1,8 @@
 function search(){
     var text = document.getElementById("search").value;
     if(text != ""){
-        window.location = window.location + "?search=" + text;
+        var here = new URL(window.location.href);
+        here.searchParams.append("search", text);
+        window.location.href = here;
     }
 }

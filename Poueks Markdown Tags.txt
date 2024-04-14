@@ -4,11 +4,11 @@ Pouek's Markdown 2.0
 #THBN(LINK) - Sets the thumbnail of the post.
 #DESC(STRING) - Adds a description to the post. If not present the first paragraph will be displayed instead.
 #IMAG(LINK ~ HEIGHT ~ WIDTH) - Adds an image to the post. If not specified Height and Width values will be defaulted to the original image size.
-#TEXT(STRING ~ SIZE ~ COLOR(HEX) ~ DECORATION) - Adds text line to the post. Only the text is required
+#TEXT(STRING ~ SIZE ~ CENTER ~ COLOR(HEX) ~ EXTRA CSS) - Adds text line to the post. Only the text is required
 #YTEM(ID OF THE VIDEO FROM YOUTUBE URL) - Embeds a YouTube video into the post.
 #NWLN - Adds a new line to the post.
 #HEAD(STRING ~ LEVEL ~ ID) - Adds header to the post.
-#LINK(LINK ~ TEXT) - Adds a "link" text to the post with the pasted URL. If not specified the text of the link will be the link.
+#LINK(LINK ~ TEXT ~ CENTER) - Adds a "link" text to the post with the pasted URL. If not specified the text of the link will be the link.
 #DATE(STRING) - Adds a date timestamp to the post.
 #IFRM(LINK ~ HEIGHT ~ WIDTH) - Embeds a website.
 #CODE(PATHTOSNIPPET ~ LANGUAGE) - Adds code snippet to the post.

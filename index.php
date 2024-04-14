@@ -112,12 +112,23 @@
                     $date = "";
                     $thumbnail = "";
                     $tag = false;
+                    $text = "";
                     foreach($post as $line){
+                        if(str_contains($line,"#DESC")){
+                            $text .= str_replace("#DESC","",$line);
+                        }
+                        if(str_contains($line,"#TEXT")){
+                            $text .= str_replace("#TEXT","",$line);
+                        }
+                        if(str_contains($line,"#HEAD")){
+                            $text .= str_replace("#HEAD","",$line);
+                        }
                         if(str_contains($line,"#NRDY")){
                             break;
                         }
                         if(str_contains($line,"#TITL") && $title == ""){
                             $title = str_replace("#TITL","",$line);
+                            $text .= str_replace("#TITL","",$line);
                         }
                         if((str_contains($line,"#DESC") || str_contains($line,"#TEXT")) && $description == ""){
                             $description = str_replace("#DESC","",$line);
@@ -125,6 +136,7 @@
                         }
                         if(str_contains($line,"#DATE") && $date == ""){
                             $date = str_replace("#DATE","",$line);
+                            $text .= str_replace("#DATE","",$line);
                         }
                         if(str_contains($line,"#THBN") && $thumbnail == ""){
                             $thumbnail = str_replace("#THBN","",$line);
@@ -134,42 +146,52 @@
                             $tg = ltrim($tg);
                             $tg = explode(" ",$tg);
                             foreach($tg as $t){
-                                if(!in_array($t,$tags)){
-                                    array_push($tags,$t);
+                                array_push($tags,str_replace("\r","",$t));
+                            }
+                            if(isset($_GET["tag"])){
+                                if(in_array($_GET["tag"],$tg)){
+                                    $tag = true;
                                 }
                             }
-                            $tag = true;
+                            else{
+                                $tag = true;
+                            }
                         }
                         if($title != "" && $description != "" && $date != "" && $thumbnail != "" && $tag){
                             break;
                         }
                     }
-                    echo '<a href="?post='.$file.'">';
-                    echo '<div class="card" id="post">';
-                    if($thumbnail != ""){
-                        echo '<img src="'.$thumbnail.'" alt="thumbnail">';
+                    $text = strtolower($text);
+                    if((isset($_GET["tag"]) && $tag) || (!isset($_GET["tag"]))){
+                        if(!isset($_GET["search"]) || str_contains($text,strtolower($_GET["search"]))){
+                            echo '<a href="?post='.$file.'">';
+                            echo '<div class="card" id="post">';
+                            if($thumbnail != ""){
+                                echo '<img src="'.$thumbnail.'" alt="thumbnail">';
+                            }
+                            echo '<div class="card-body text-white">';
+                            echo '<h4 class="card-title" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: bold;">'.$title.'</h4>';
+                            echo '<h5 class="card-text" style="color: rgb(155, 155, 155); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'.$description.'</h5>';
+                            echo '<h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: rgb(155, 155, 155);">'.$date.'</h6>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '<br>';
+                        }
                     }
-                    echo '<div class="card-body text-white">';
-                    echo '<h4 class="card-title" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: bold;">'.$title.'</h4>';
-                    echo '<h5 class="card-text" style="color: rgb(155, 155, 155); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'.$description.'</h5>';
-                    echo '<h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: rgb(155, 155, 155);">'.$date.'</h6>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</a>';
-                    echo '<br>';
                 }
             }
             else{
                 foreach($post as $line){
                     switch($line){
                         case str_contains($line,"#TITL"):
-                            echo "<h1 style='font-weight: bold;'>".str_replace("#TITL","",$line)."</h1>";
+                            echo "<h1 style='font-weight: bold;'>".ltrim(str_replace("#TITL","",$line))."</h1>";
                             break;
                         case str_contains($line,"#DATE"):
-                            echo "<h6 style='color: rgb(155, 155, 155);'>".str_replace("#DATE","",$line)."</h6>";
+                            echo "<h6 style='color: rgb(155, 155, 155);'>".ltrim(str_replace("#DATE","",$line))."</h6>";
                             break;
                         case str_contains($line,"#DESC"):
-                            echo "<p>".str_replace("#DESC","",$line)."</p>";
+                            echo "<p>".ltrim(str_replace("#DESC","",$line))."</p>";
                             break;
                         case str_contains($line,"#NWLN"):
                             echo "<br>";
@@ -179,17 +201,21 @@
                             $values = explode("~",$values);
                             $font_size = "20px";
                             $color = "white";
-                            $text_decoration = "none";
+                            $extra_style = "";
+                            $extra_styles = "";
                             if(isset($values[1])){
                                 $font_size = ltrim($values[1]);
                             }
                             if(isset($values[2])){
-                                $color = ltrim($values[2]);
+                                $extra_style = "display: table; margin: 0 auto;";
                             }
                             if(isset($values[3])){
-                                $text_decoration = ltrim($values[3]);
+                                $color = ltrim($values[3]);
                             }
-                            echo "<span style='font-size: ".$font_size."; color: ".$color."; text-decoration: ".$text_decoration.";'>".$values[0]."</span>";
+                            if(isset($values[4])){
+                                $extra_style = ltrim($values[4]);
+                            }
+                            echo "<span style='font-size: ".$font_size."; color: ".$color.";".$extra_style.$extra_style."'>".$values[0]."</span>";
                             break;
                         case str_contains($line,"#HEAD"):
                             $values = str_replace("#HEAD","",$line);
@@ -215,17 +241,21 @@
                                 $width = ltrim($values[2]);
                             }
                             echo "<p></p>";
-                            echo "<img src='".$values[0]."' height='".$height."' width='".$width."'>";
+                            echo "<img src='".ltrim($values[0])."' height='".$height."' width='".$width."'>";
                             echo "<p></p>";
                             break;
                         case str_contains($line,"#LINK"):
                             $values = str_replace("#LINK","",$line);
                             $values = explode("~",$values);
                             $text = $values[0];
+                            $center = false;
                             if(isset($values[1])){
-                                $text = $values[1];
+                                $text = ltrim($values[1]);
                             }
-                            echo "<a style='color: white; text-decoration: underline; font-size: 20px;' href='".$values[0]."' target='blank'>".$text."</a>";
+                            if(isset($values[2])){
+                                $center = "display: table; margin: 0 auto;";
+                            }
+                            echo "<a style='color: white; text-decoration: underline; font-size: 20px; ".$center."' href='".ltrim($values[0])."' target='blank'>".$text."</a>";
                             break;
                         case str_contains($line,"#IFRM"):
                             $values = str_replace("#IFRM","",$line);
@@ -233,7 +263,7 @@
                             $height = ltrim($values[1]);
                             $width = ltrim($values[2]);
                             echo "<p></p>";
-                            echo "<iframe src='".$values[0]."' width='".$width."' height='".$height."'></iframe>";
+                            echo "<iframe src='".ltrim($values[0])."' width='".$width."' height='".$height."'></iframe>";
                             echo "<p></p>";
                             break;
                         case str_contains($line,"#CODE"):
@@ -265,17 +295,20 @@
     </div>
 </body>
 <?php
-    foreach($tags as $tag){
-        echo 
-        "<script>
-            var button = document.createElement(`a`);
-            button.setAttribute(`role`,`button`);
-            button.setAttribute(`class`,`btn btn-dark`);
-            button.setAttribute(`href`,`?tag=".$tag."`);
-            button.setAttribute(`style`,`margin: 5px; background-color: black;`);
-            button.appendChild(document.createTextNode(`".$tag."`));
-            document.getElementById(`tags`).appendChild(button);
-        </script>";
+    if(!isset($_GET["post"])){
+        $tags = array_unique($tags);
+        foreach($tags as $tag){
+            echo 
+            "<script>
+                var button = document.createElement(`a`);
+                button.setAttribute(`role`,`button`);
+                button.setAttribute(`class`,`btn btn-dark`);
+                button.setAttribute(`href`,`?tag=".$tag."`);
+                button.setAttribute(`style`,`margin: 5px; background-color: black;`);
+                button.appendChild(document.createTextNode(`".$tag."`));
+                document.getElementById(`tags`).appendChild(button);
+            </script>";
+        }
     }
 ?>
 <script>
