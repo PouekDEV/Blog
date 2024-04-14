@@ -103,7 +103,7 @@
         <?php
             if(!isset($_GET["post"])){
                 $tags = array();
-                $files = array_diff(scandir($path,SCANDIR_SORT_DESCENDING), array('.', '..', 'snippets'));
+                $files = array_diff(scandir($path,SCANDIR_SORT_DESCENDING), array('.', '..', 'snippets', 'img'));
                 foreach($files as $file){
                     $post = file_get_contents($path.$file);
                     $post = explode("\n",$post);
