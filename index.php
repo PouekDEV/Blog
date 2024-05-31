@@ -43,6 +43,14 @@
             $post = $_GET["content"];
             $post = explode("\n",$post);
         }
+        else if(isset($_GET["tag"])){
+            echo "<title>Posts for tag: ".$_GET["tag"]."</title>";
+            echo "<meta name='description' content='Pouek's all-over-the-place blog'>";
+            echo "<meta name='og:title' content='Posts for tag: ".$_GET["tag"]."'>";
+            echo "<meta name='og:description' content='Pouek's all-over-the-place blog'>";
+            echo "<meta name='og:url' content='https://blog.pouekdev.one'>";
+            echo "<meta name='og:image' content='https://www.pouekdev.one/miQZ2R.gif'>";
+        }
         else{
     ?>
     <title>Blog</title>
